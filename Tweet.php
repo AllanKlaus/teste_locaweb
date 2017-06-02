@@ -135,7 +135,7 @@ class Tweet {
     }
     
     public function avaliarTweet(){
-        //$this->avaliacao
+        
         // Usuário com mais seguidores = 0.6
         // Tweets com mais retweets = 0.3
         // Tweets com mais like =  0.15
