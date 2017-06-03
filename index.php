@@ -9,13 +9,17 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <form action="./most_relevants/most_relevants.php" method="POST">
+        <!--<form action="./most_relevants/most_relevants.php" method="POST">-->
+        <form action="./most_mentions/most_mentions.php" method="POST">
         <?php
             session_start(); 
             require_once 'Tweet.php';
             
             $listaTweet = Array();
+            $idUsuario = Array();
+            
             $i = 0;
+            $j = 0;
             
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'http://tweeps.locaweb.com.br/tweeps');
@@ -33,9 +37,9 @@ and open the template in the editor.
             $userData = json_decode($data); 
             //var_dump($userData);
             
-            $position_json = 0;
+            //$position_json = 0;
             
-            '<ul>';
+            //'<ul>';
             foreach($userData->statuses as $t) {               
                 $usuario = $t->{"user"};
                 
@@ -62,16 +66,19 @@ and open the template in the editor.
                 $followers_count = $usuario->followers_count;
                 
                 if (($id_str_user_mentions == 42 && $id_in_reply_to_user_id_str != 42) || ($id_str_user_mentions != 42 && $id_in_reply_to_user_id_str != 42)){
-                    $tweet = new Tweet($position_json, $followers_count, $retweet_count, $favourites_count, $screen_name, $created_at, $text, $id_str_tweet, $id_str_user, $id_str_user_mentions, $id_in_reply_to_user_id_str);
-                
-                    $listaTweet[$i] = $tweet;
-                    $i = $i + 1;
+                    $tweet = new Tweet(/*$position_json, */$followers_count, $retweet_count, $favourites_count, $screen_name, $created_at, $text, $id_str_tweet, $id_str_user, $id_str_user_mentions, $id_in_reply_to_user_id_str);
+                    //$listaTweet[$i] = $tweet;
+                    array_push($listaTweet, $tweet);
+                    
+                    if (!in_array($tweet->getId_str_user(), $idUsuario)){
+                        array_push($idUsuario, $tweet->getId_str_user());
+                    }
                 }                
-                $position_json = $position_json + 1;
+                //$position_json = $position_json + 1;
             }
-            echo '</ul>';
-            
-            for ($y=0; $y<$i; $y = $y+1){
+            //echo '</ul>';
+            //var_dump($idUsuario);
+            for ($y=0; $y<count($listaTweet); $y = $y+1){
                 $listaTweet[$y]->avaliarTweet();                
             }
                         
@@ -85,9 +92,11 @@ and open the template in the editor.
             $ser = serialize($listaTweet);
             
             $_SESSION['tweets'] = serialize($listaTweet);
+            $_SESSION['idUsers'] = serialize($idUsuario);
             //echo $ser;
             
-            echo '<button type="submit" name="mostRelevants" value="">Ver os tweets mais relevantes</button>';
+            //echo '<button type="submit" name="mostRelevants" value="">Ver os tweets mais relevantes</button>';
+            echo '<button type="submit" name="mostMentions" value="">Ver usuários que mais mencionaram Locaweb</button>';
             /*echo '<ul>';
             for ($y=0; $y<$i; $y = $y+1){
                 echo '<li>';

@@ -11,7 +11,7 @@ and open the template in the editor.
     <body>
         <?php
             session_start();
-            $caminho = $_SERVER['DOCUMENT_ROOT']."/locaweb/trunk/";
+            $caminho = $_SERVER['DOCUMENT_ROOT']."/teste_locaweb/trunk/";
             require_once $caminho."Tweet.php";
 
             $listaTweet = unserialize($_SESSION['tweets']);
