@@ -6,6 +6,7 @@ and open the template in the editor.
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="css/carousel.css" rel="stylesheet" type="text/css" media="screen">
         <title></title>
     </head>
     <body>
@@ -15,8 +16,8 @@ and open the template in the editor.
             require_once $caminho."Tweet.php";
 
             $listaTweet = unserialize($_SESSION['tweets']);
-            
-            echo '<ul>';
+
+    echo '<ul>';
             $i = count($listaTweet);
             for ($y=0; $y<$i; $y = $y+1){
                 echo '<li>';
@@ -44,6 +45,7 @@ and open the template in the editor.
                 echo '</li>';
             }
             echo '</ul>';
+            
         ?>
     </body>
 </html>
