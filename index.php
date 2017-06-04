@@ -9,8 +9,7 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <!--<form action="./most_relevants/most_relevants.php" method="POST">-->
-        <form action="./most_mentions/most_mentions.php" method="POST">
+        
         <?php
             session_start(); 
             require_once 'Tweet.php';
@@ -35,17 +34,12 @@ and open the template in the editor.
             curl_close($ch);
 
             $userData = json_decode($data); 
-            //var_dump($userData);
-            
-            //$position_json = 0;
-            
-            //'<ul>';
+
             foreach($userData->statuses as $t) {               
                 $usuario = $t->{"user"};
                 
                 $mencao = $t->{"entities"};
                 $user_mentions = $mencao->user_mentions;
-                //var_dump($user_mentions);
                 
                 $followers_count = $usuario->followers_count;
                 $retweet_count = $t->{"retweet_count"};
@@ -66,18 +60,25 @@ and open the template in the editor.
                 $followers_count = $usuario->followers_count;
                 
                 if (($id_str_user_mentions == 42 && $id_in_reply_to_user_id_str != 42) || ($id_str_user_mentions != 42 && $id_in_reply_to_user_id_str != 42)){
-                    $tweet = new Tweet(/*$position_json, */$followers_count, $retweet_count, $favourites_count, $screen_name, $created_at, $text, $id_str_tweet, $id_str_user, $id_str_user_mentions, $id_in_reply_to_user_id_str);
-                    //$listaTweet[$i] = $tweet;
+                    $tweet = new Tweet($followers_count, $retweet_count, $favourites_count, $screen_name, $created_at, $text, $id_str_tweet, $id_str_user, $id_str_user_mentions, $id_in_reply_to_user_id_str);
                     array_push($listaTweet, $tweet);
                     
                     if (!in_array($tweet->getId_str_user(), $idUsuario)){
                         array_push($idUsuario, $tweet->getId_str_user());
                     }
                 }                
-                //$position_json = $position_json + 1;
             }
-            //echo '</ul>';
-            //var_dump($idUsuario);
+            /*$tweet2 = new Tweet(11, 4, 3, "Larissa_Camila", "Mon Sep 24 03:35:21 +0000 2012", "Teste 1", 2, 1, 42, 42);
+            array_push($listaTweet, $tweet2);
+            if (!in_array($tweet2->getId_str_user(), $idUsuario)){
+                        array_push($idUsuario, $tweet2->getId_str_user());
+                    }
+            $tweet3 = new Tweet(30, 4, 3, "Larissa_Camila", "Mon Sep 24 03:35:21 +0000 2012", "Teste 2", 3, 1, 42, 42);
+            array_push($listaTweet, $tweet3);
+            if (!in_array($tweet3->getId_str_user(), $idUsuario)){
+                        array_push($idUsuario, $tweet3->getId_str_user());
+                    }*/
+
             for ($y=0; $y<count($listaTweet); $y = $y+1){
                 $listaTweet[$y]->avaliarTweet();                
             }
@@ -89,14 +90,12 @@ and open the template in the editor.
                     return (($a->getAvaliacao() > $b->getAvaliacao()) ? -1 : 1 );
                 }
             );
-            $ser = serialize($listaTweet);
+            
             
             $_SESSION['tweets'] = serialize($listaTweet);
             $_SESSION['idUsers'] = serialize($idUsuario);
             //echo $ser;
-            
-            //echo '<button type="submit" name="mostRelevants" value="">Ver os tweets mais relevantes</button>';
-            echo '<button type="submit" name="mostMentions" value="">Ver usuários que mais mencionaram Locaweb</button>';
+        
             /*echo '<ul>';
             for ($y=0; $y<$i; $y = $y+1){
                 echo '<li>';
@@ -136,6 +135,12 @@ and open the template in the editor.
             echo '</ul>';
             */
         ?>
+        <form action="./most_relevants/most_relevants.php" method="POST">
+            <button type="submit" name="mostRelevants" value="">Ver os tweets mais relevantes</button>
+        </form>
+        </br>
+        <form action="./most_mentions/most_mentions.php" method="POST">                
+            <button type="submit" name="mostMentions" value="">Ver usuários que mais mencionaram Locaweb</button>
         </form>
     </body>
 </html>

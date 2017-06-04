@@ -32,36 +32,27 @@ and open the template in the editor.
                 array_push($mostMentionsLocaweb, $ret);
             }
             
-            var_dump($mostMentionsLocaweb);
+            $b = array_map('count', $mostMentionsLocaweb);
             
-            /*echo '<ul>';
-            $i = count($listaTweet);
-            for ($y=0; $y<$i; $y = $y+1){
-                echo '<li>';
-                echo 'Screen Name: <a href=\'http://www.twitter.com/'.$listaTweet[$y]->getScreenName().'\'>'.$listaTweet[$y]->getScreenName().'<a/>'; 
-                echo '</li>';
-                
-                echo '<li>';
-                echo 'Número de seguidores: '; echo $listaTweet[$y]->getFollowersCount();
-                echo '</li>';
-                
-                echo '<li>';
-                echo 'Número de retweets: '; echo $listaTweet[$y]->getRetweetCount();
-                echo '</li>';
-                
-                echo '<li>';
-                echo 'Número de likes do tweet: '; echo $listaTweet[$y]->getFavoritesCount();
-                echo '</li>';
-                
-                echo '<li>';
-                echo 'Conteúdo do tweet: '; echo $listaTweet[$y]->getText();
-                echo '</li>';
-                
-                echo '<li>';
-                echo 'Data e hora do tweet: <a href=\'http://www.twitter.com/'.$listaTweet[$y]->getScreenName().'/status/'.$listaTweet[$y]->getId_str_tweet().'\'>'.$listaTweet[$y]->getCreatAt().'<a/>'; 
-                echo '</li>';
+            arsort($b);
+            $v = key($b);
+
+            $tweets = array();
+            while ($b[$v] > 1){
+                array_push($tweets, $mostMentionsLocaweb[$v]);
+                unset($b[$v]);
+                unset($mostMentionsLocaweb[$v]);
+                $v = key($b);
             }
-            echo '</ul>';*/
+            
+            while (!empty($b)){
+                array_push($tweets, $mostMentionsLocaweb[$v]);
+                unset($b[$v]);
+                unset($mostMentionsLocaweb[$v]);
+                $v = key($b);
+            }
+            var_dump($tweets);          
+            
         ?>
     </body>
 </html>
