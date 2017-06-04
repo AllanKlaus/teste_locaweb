@@ -138,17 +138,19 @@ class Tweet {
         
         // Usuário com mais seguidores = 0.6
         // Tweets com mais retweets = 0.3
-        // Tweets com mais like =  0.15
+        // Tweets com mais like =  0.1
         
         $pond_user = 0.6 * $this->getFollowersCount();
         $pond_retweets = 0.3 * $this->getRetweetCount();
-        $pond_likes = 0.15 * $this->getFavoritesCount();
+        $pond_likes = 0.1 * $this->getFavoritesCount();
         
         $valor_avaliacao= $pond_user + $pond_retweets + $pond_likes;
         
         $this->setAvaliacao($valor_avaliacao);
         
     }
+    
+    
     
 }
 

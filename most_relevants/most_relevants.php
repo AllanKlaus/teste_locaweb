@@ -16,6 +16,14 @@ and open the template in the editor.
             require_once $caminho."Tweet.php";
 
             $listaTweet = unserialize($_SESSION['tweets']);
+            
+             usort(
+                $listaTweet,
+                function($a,$b) {
+                    if($a->getAvaliacao() == $b->getAvaliacao()) return 0;
+                    return (($a->getAvaliacao() > $b->getAvaliacao()) ? -1 : 1 );
+                }
+            );
 
     echo '<ul>';
             $i = count($listaTweet);
@@ -43,6 +51,10 @@ and open the template in the editor.
                 echo '<li>';
                 echo 'Data e hora do tweet: <a href=\'http://www.twitter.com/'.$listaTweet[$y]->getScreenName().'/status/'.$listaTweet[$y]->getId_str_tweet().'\'>'.$listaTweet[$y]->getCreatAt().'<a/>'; 
                 echo '</li>';
+                
+                /*echo '<li>';
+                echo 'Avaliação: '; echo $listaTweet[$y]->getAvaliacao();
+                echo '</li>';*/
             }
             echo '</ul>';
             

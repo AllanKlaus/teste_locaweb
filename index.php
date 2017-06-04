@@ -11,7 +11,7 @@ and open the template in the editor.
     </head>
     <body>
         
-        <?php
+        <?php 
             session_start(); 
             require_once 'Tweet.php';
             
@@ -66,29 +66,20 @@ and open the template in the editor.
                     }
                 }                
             }
-            /*$tweet2 = new Tweet(11, 4, 3, "Larissa_Camila", "Mon Sep 24 03:35:21 +0000 2012", "Teste 1", 2, 1, 42, 42);
+            $tweet2 = new Tweet(11, 4, 3, "Larissa_Camila", "Mon Sep 24 03:35:21 +0000 2012", "Teste 1", 2, 1, 42, 42);
             array_push($listaTweet, $tweet2);
             if (!in_array($tweet2->getId_str_user(), $idUsuario)){
                         array_push($idUsuario, $tweet2->getId_str_user());
                     }
-            $tweet3 = new Tweet(30, 4, 3, "Larissa_Camila", "Mon Sep 24 03:35:21 +0000 2012", "Teste 2", 3, 1, 42, 42);
+            $tweet3 = new Tweet(11, 4, 3, "Larissa_Camila", "Mon Sep 24 03:35:21 +0000 2012", "Teste 2", 3, 1, 42, 42);
             array_push($listaTweet, $tweet3);
             if (!in_array($tweet3->getId_str_user(), $idUsuario)){
                         array_push($idUsuario, $tweet3->getId_str_user());
-                    }*/
+                    }
 
             for ($y=0; $y<count($listaTweet); $y = $y+1){
                 $listaTweet[$y]->avaliarTweet();                
-            }
-                        
-            usort(
-                $listaTweet,
-                function($a,$b) {
-                    if($a->getAvaliacao() == $b->getAvaliacao()) return 0;
-                    return (($a->getAvaliacao() > $b->getAvaliacao()) ? -1 : 1 );
-                }
-            );
-            
+            }          
             
             $_SESSION['tweets'] = serialize($listaTweet);
             $_SESSION['idUsers'] = serialize($idUsuario);
