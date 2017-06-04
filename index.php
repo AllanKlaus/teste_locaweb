@@ -6,6 +6,7 @@ and open the template in the editor.
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="css/cover.css" rel="stylesheet" type="text/css" media="screen">
         <title></title>
     </head>
     <body>
@@ -16,10 +17,7 @@ and open the template in the editor.
             
             $listaTweet = Array();
             $idUsuario = Array();
-            
-            $i = 0;
-            $j = 0;
-            
+
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'http://tweeps.locaweb.com.br/tweeps');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -135,12 +133,17 @@ and open the template in the editor.
             echo '</ul>';
             */
         ?>
-        <form action="./most_relevants/most_relevants.php" method="POST">
-            <button type="submit" name="mostRelevants" value="">Ver os tweets mais relevantes</button>
-        </form>
-        </br>
-        <form action="./most_mentions/most_mentions.php" method="POST">                
-            <button type="submit" name="mostMentions" value="">Ver usuários que mais mencionaram Locaweb</button>
-        </form>
+        <div id="texto">
+            A Locaweb está planejando uma maneira de prover suporte e iniciar protocolos para quem reclamar de seus produtos via Twitter. A idéia é listar os tweets mais relevantes e os usuários que mais mencionam a Locaweb.
+        </div>
+        <div id="menu">
+            <form action="./most_relevants/most_relevants.php" method="POST">
+                <button type="submit" name="mostRelevants" class="btn-default">Ver os tweets mais relevantes</button>
+            </form>
+            </br>
+            <form action="./most_mentions/most_mentions.php" method="POST">                
+                <button type="submit" name="mostMentions" class="btn btn-default">Ver usuários que mais mencionaram Locaweb</button>
+            </form>
+        </div>
     </body>
 </html>
