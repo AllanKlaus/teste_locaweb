@@ -7,7 +7,7 @@ and open the template in the editor.
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/cover.css" rel="stylesheet" type="text/css" media="screen">
-        <title></title>
+        <title>Página Inicial</title>
     </head>
     <body>
         
@@ -66,7 +66,7 @@ and open the template in the editor.
                     }
                 }                
             }
-            $tweet2 = new Tweet(11, 4, 3, "Larissa_Camila", "Mon Sep 24 03:35:21 +0000 2012", "Teste 1", 2, 1, 42, 42);
+            $tweet2 = new Tweet(11, 5, 4, "Larissa_Camila", "Mon Sep 24 03:35:21 +0000 2012", "Teste 1", 2, 1, 42, 42);
             array_push($listaTweet, $tweet2);
             if (!in_array($tweet2->getId_str_user(), $idUsuario)){
                         array_push($idUsuario, $tweet2->getId_str_user());

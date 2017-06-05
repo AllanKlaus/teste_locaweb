@@ -16,6 +16,7 @@ class Usuario {
     public $total_followers;
     public $total_retweets;
     public $total_likes;
+    public $total_mentions;
     public $id_posi;
     public $avaliacao;
     
@@ -33,6 +34,10 @@ class Usuario {
     
     public function getTotalLikes(){
         return $this->total_likes;        
+    }
+    
+    public function getTotalMentions(){
+        return $this->total_mentions;        
     }
     
     public function getIdPosi(){
@@ -59,6 +64,10 @@ class Usuario {
         $this->id_posi = $idPosi;
     }
     
+    public function setTotalMentions($totalMentions){
+        $this->total_mentions = $totalMentions;
+    }
+    
     public function getAvaliacao(){
         return $this->avaliacao;        
     }
@@ -72,12 +81,13 @@ class Usuario {
         // Usuário com mais seguidores = 0.6
         // Tweets com mais retweets = 0.3
         // Tweets com mais like =  0.1
+        // Número de vezes em que a Locaweb foi mencionada = quantidade de vezes que isso ocorreu
         
         $pond_user = 0.6 * $this->getTotalFollowers();
         $pond_retweets = 0.3 * $this->getTotalRetweets();
         $pond_likes = 0.1 * $this->getTotalLikes();
         
-        $valor_avaliacao= $pond_user + $pond_retweets + $pond_likes;
+        $valor_avaliacao = $pond_user + $pond_retweets + $pond_likes;
         
         $this->setAvaliacao($valor_avaliacao);
         

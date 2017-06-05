@@ -6,7 +6,8 @@ and open the template in the editor.
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/carousel.css" rel="stylesheet" type="text/css" media="screen">
+        <link href="../css/jumbotron.css" rel="stylesheet" type="text/css">
+        <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
         <title>Tweets</title>
     </head>
     <body>
@@ -27,7 +28,6 @@ and open the template in the editor.
                 }
             );
             
-            //var_dump($listaTweet);
             for ($i=0; $i<(count($listaTweet)); $i=$i+1){
                 $resultado = new ResultadoTweet();
                 
@@ -44,35 +44,51 @@ and open the template in the editor.
                 array_push($listagemTweets, $resultado);
             }
             
-            echo $json = json_encode($listagemTweets);
-            /*echo '<ul>';
-            $i = count($listaTweet);
-            for ($y=0; $y<$i; $y = $y+1){
-                echo '<li>';
-                echo 'Screen Name: <a href=\'http://www.twitter.com/'.$listaTweet[$y]->getScreenName().'\'>'.$listaTweet[$y]->getScreenName().'<a/>'; 
-                echo '</li>';
-                
-                echo '<li>';
-                echo 'Número de seguidores: '; echo $listaTweet[$y]->getFollowersCount();
-                echo '</li>';
-                
-                echo '<li>';
-                echo 'Número de retweets: '; echo $listaTweet[$y]->getRetweetCount();
-                echo '</li>';
-                
-                echo '<li>';
-                echo 'Número de likes do tweet: '; echo $listaTweet[$y]->getFavoritesCount();
-                echo '</li>';
-                
-                echo '<li>';
-                echo 'Conteúdo do tweet: '; echo $listaTweet[$y]->getText();
-                echo '</li>';
-                
-                echo '<li>';
-                echo 'Data e hora do tweet: <a href=\'http://www.twitter.com/'.$listaTweet[$y]->getScreenName().'/status/'.$listaTweet[$y]->getId_str_tweet().'\'>'.$listaTweet[$y]->getCreatAt().'<a/>'; 
-                echo '</li>';
-            }
-            echo '</ul>';    */
+            $json = json_encode($listagemTweets);
+            
+            $fp = fopen('arquivo.json', 'w');
+            fwrite($fp, $json);
+            fclose($fp);
         ?>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="javascript:window.history.go(-1)">Página Inicial</a>
+              </div>
+            </div>
+        </nav>
+        <div class="jumbotron">
+            <div class="container">
+              <p>Aqui estão listados os tweets classificados como mais relevantes para a Locaweb. Um arquivo JSON foi gerado no diretório com todos os dados apresentados abaixo.</p>
+              <p><a class="btn btn-primary btn-lg" href="arquivo.json" target="_blank" role="button">Visualizar JSON &raquo;</a></p>
+            </div>
+          </div>
+          <?php
+                $i = 0;                
+                echo '<div class="container">';
+                echo '<div class="row">';
+                foreach ($listagemTweets as $lt){
+                    $i = $i+1;
+                    echo '
+                        <div class="col-md-4">
+                        <h2><a href="'.$lt->getLink_perfil().'" target="_blank">@'.$lt->getScreen_name().'</a></h2>
+                        <h5><a href="'.$lt->getLink_tweet().'" target="_blank">@'.$lt->getCreated_at().'</a></h5>
+                        <p><b>'.$lt->getText().'</b></p>
+                        <p>'.$lt->getFollowers_count().' seguidores </p>
+                        <p>'.$lt->getRetweet_count().' retweets</p>
+                        <p>'.$lt->getFavourites_count().' likes</p>
+                        
+                        </div>';
+                    if ($i == 3){
+                        $i = 0;
+                        echo '</div>';
+                        echo '<div class="row">';
+                    }
+                }
+                echo '</div>';
+            echo '</div>';
+          ?>
+          <hr>
+        </div>
     </body>
 </html>
