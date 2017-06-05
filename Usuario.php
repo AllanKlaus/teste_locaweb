@@ -36,7 +36,7 @@ class Usuario {
     }
     
     public function getIdPosi(){
-        return $this->total_posi;        
+        return $this->id_posi;        
     }
     
     public function setIdUser($idUser){

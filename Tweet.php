@@ -12,12 +12,12 @@
  */
 class Tweet {
     //public $position_json;
-    public $followers_count;
-    public $retweet_count;
-    public $favourites_count;
-    public $screen_name;
-    public $created_at;
-    public $text;
+    public $followers_count; //
+    public $retweet_count; //
+    public $favourites_count; //
+    public $screen_name;//
+    public $created_at; //
+    public $text; //
     public $id_str_tweet;
     public $id_str_user;
     public $id_str_mentions;
@@ -37,14 +37,6 @@ class Tweet {
         $this->id_in_reply_to_user_id_str = $idInReplyToUserIdStr;
         //$this->position_json = $positionJson;
     }
-    
-    /*public function getPositionJson(){
-        return $this->position_json;
-    }
-    
-    public function setPositionJson($position_json){
-        $this->position_json = $position_json;
-    }*/
     
     public function getFollowersCount(){
         return $this->followers_count;

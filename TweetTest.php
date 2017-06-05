@@ -20,17 +20,30 @@ class TweetTest extends PHPUnit_Framework_TestCase{
         
         $tweet->setAvaliacao("");
         $tweet->setCreated_at("");
-        $tweet->setFavorites_count("");
-        $tweet->setFollowers_count("");
+        $tweet->setFavorites_count(30);
+        $tweet->setFollowers_count(14);
         $tweet->setId_in_reply_to_user_id_str("");
         $tweet->setId_str_mentions("");
         $tweet->setId_str_user("");
-        $tweet->setRetweet_count("");
+        $tweet->setRetweet_count(54);
         $tweet->setScreen_name("");
-        $tweet->setText("Texto");
+        $tweet->setText("");
         
-        $this->assertEquals("Texto Errado", $tweet->getText());
+        $this->assertEquals("", $tweet->getText());
+        $this->assertEquals("", $tweet->getCreatAt());
+        $this->assertEquals(30, $tweet->getFavoritesCount());
+        $this->assertEquals(14, $tweet->getFollowersCount());
+        $this->assertEquals("", $tweet->getId_in_reply_to_user_id_str());
+        $this->assertEquals("", $tweet->getId_str_mentions());
+        $this->assertEquals(54, $tweet->getRetweetCount());
+        $this->assertEquals("", $tweet->getScreenName());
+        
+        $this->assertEquals(26, $tweet->setAvaliacao());
+        
+                
     }
+    
+    
         
 }
 
