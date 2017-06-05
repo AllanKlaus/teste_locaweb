@@ -38,7 +38,7 @@ class TweetTest extends PHPUnit_Framework_TestCase{
         $this->assertEquals(54, $tweet->getRetweetCount());
         $this->assertEquals("", $tweet->getScreenName());
         
-        $this->assertEquals(26, $tweet->setAvaliacao());
+        $this->assertEquals("", $tweet->avaliarTweet());
         
                 
     }
