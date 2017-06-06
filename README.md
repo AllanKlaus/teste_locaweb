@@ -5,8 +5,8 @@
 ----------------------
 * Linguagem: PHP
 * Utilizados como apoio ao desenvolvimento:
-** WampServer (v3.0.6): <http://www.wampserver.com/en/>; 
-** BootStrap (v3.3.7): <http://getbootstrap.com/>
+WampServer (v3.0.6): <http://www.wampserver.com/en/>; 
+BootStrap (v3.3.7): <http://getbootstrap.com/>
 * O projeto está disponível no gitHub: <https://github.com/lcpapa/teste_locaweb.git>
 
 
