@@ -14,7 +14,9 @@ and open the template in the editor.
     <body>
         <?php
             session_start();
-            $caminho = $_SERVER['DOCUMENT_ROOT']."/teste_locaweb/trunk/";
+            //$caminho = $_SERVER['DOCUMENT_ROOT']."/teste_locaweb/trunk/";
+            $caminho =  dirname(dirname( __FILE__ ));
+            $caminho = $caminho.'/';
             require_once $caminho."Tweet.php";
             require_once $caminho."Usuario.php";
             require_once $caminho."ResultadoTweet.php";

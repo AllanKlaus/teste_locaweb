@@ -13,7 +13,9 @@ and open the template in the editor.
     <body>
         <?php
             session_start();
-            $caminho = $_SERVER['DOCUMENT_ROOT']."/teste_locaweb/trunk/"; // Pegando o caminho da pasta do projeto
+            $caminho =  dirname(dirname( __FILE__ ));
+            $caminho = $caminho.'/';
+            //$caminho = $_SERVER['DOCUMENT_ROOT']."/teste_locaweb/trunk/"; // Pegando o caminho da pasta do projeto
             require_once $caminho."Tweet.php"; // Criada para guardar os dados de cada tweet
             require_once $caminho."ResultadoTweet.php"; // Criada para guardar os dados que deverão integrar resultado final
 
