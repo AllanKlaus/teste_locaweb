@@ -81,7 +81,7 @@ class Usuario {
         // Usuário com mais seguidores = 0.6
         // Tweets com mais retweets = 0.3
         // Tweets com mais like =  0.1
-        $pond_mentions = $this->getTotalMentions() * 10000;
+        $pond_mentions = $this->getTotalMentions() * 1000;
         $pond_user = 0.6 * $this->getTotalFollowers();
         $pond_retweets = 0.3 * $this->getTotalRetweets();
         $pond_likes = 0.1 * $this->getTotalLikes();
