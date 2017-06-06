@@ -3,24 +3,24 @@
 
 # Informações gerais #
 ----------------------
-- Linguagem: PHP
-- Sistema operacional: 64 bits
-- Utilizados como apoio ao desenvolvimento:
+* Linguagem: PHP
+* Sistema operacional: 64 bits
+* Utilizados como apoio ao desenvolvimento:
 WampServer (v3.0.6): <http://www.wampserver.com/en/>
 BootStrap (v3.3.7): <http://getbootstrap.com/>
-- O projeto está disponível no gitHub: <https://github.com/lcpapa/teste_locaweb.git>
+* O projeto está disponível no gitHub: <https://github.com/lcpapa/teste_locaweb.git>
 
 
 # Requisitos Gerais #
 ----------------------
-Versão mínima PHP: 5.6.25
-Versão mínima Apache: 2.4.23
-Versão mínima MySql: 5.7.14
+* Versão mínima PHP: 5.6.25
+* Versão mínima Apache: 2.4.23
+* Versão mínima MySql: 5.7.14
 
 
 # Libs #
 --------
-PHPUnit (v5.7.20): <https://phpunit.de/>
+* PHPUnit (v5.7.20): <https://phpunit.de/>
 
 
 # Informações Complementares #
@@ -36,15 +36,14 @@ De acordo com estas, um tweet tem seu "índice" calculado e é inserido em uma l
 
 Um exemplo:
 -> Tweet ID 32
-20 seguidores 
-10 retweets   
-2 likes       
+* 20 seguidores 
+* 10 retweets   
+* 2 likes       
 Índice final: 15,2
 
 
 -> Tweet ID 22
-30 seguidores 
-20 retweets   
-5 likes       
+* 30 seguidores 
+* 20 retweets   
+* 5 likes       
 Índice final: 24,5
- 
