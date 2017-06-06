@@ -81,13 +81,12 @@ class Usuario {
         // Usuário com mais seguidores = 0.6
         // Tweets com mais retweets = 0.3
         // Tweets com mais like =  0.1
-        // Número de vezes em que a Locaweb foi mencionada = quantidade de vezes que isso ocorreu
-        
+        $pond_mentions = $this->getTotalMentions() * 10000;
         $pond_user = 0.6 * $this->getTotalFollowers();
         $pond_retweets = 0.3 * $this->getTotalRetweets();
         $pond_likes = 0.1 * $this->getTotalLikes();
         
-        $valor_avaliacao = $pond_user + $pond_retweets + $pond_likes;
+        $valor_avaliacao = $pond_user + $pond_retweets + $pond_likes + $pond_mentions;
         
         $this->setAvaliacao($valor_avaliacao);
         

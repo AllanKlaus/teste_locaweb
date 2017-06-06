@@ -9,32 +9,27 @@ and open the template in the editor.
         <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
         <link href="../css/jumbotron.css" rel="stylesheet" type="text/css">
         <title>Usuários</title>
-
-
-    
     </head>
     
     <body>
         <?php
-            /*function idUser($lista, $id) {
-                return ($lista->getId_str_user() == $id);
-            }*/
-        
             session_start();
             $caminho = $_SERVER['DOCUMENT_ROOT']."/teste_locaweb/trunk/";
             require_once $caminho."Tweet.php";
             require_once $caminho."Usuario.php";
             require_once $caminho."ResultadoTweet.php";
             
-            $listaTweet = unserialize($_SESSION['tweets']);
-//            $idUsers = unserialize($_SESSION['idUsers']);
+            $listaTweet = unserialize($_SESSION['tweets']); // Pegando a lista de tweets salva na session
             
+            //Vetores auxiliares
             $listaTweetMenc = array();
             $idUsers = array();
             $mostMentionsLocaweb = array();            
             $listaUsuarios = array();            
             $listagemTweets = array();
+            $arr = array();
             
+            // Pegando apenas os usuários que mencionaram a Locaweb
             foreach ($listaTweet as $lisTwe){
                 if ($lisTwe->getId_str_mentions() == 42){
                     array_push($listaTweetMenc, $lisTwe);
@@ -46,6 +41,8 @@ and open the template in the editor.
             
             for ($i=0; $i<count($idUsers);$i=$i+1){
                 $id = $idUsers[$i];
+                
+                // Agrupando os tweets dos usuários
                 $ret = array_filter($listaTweetMenc, function ($lista) use ($id){
                                                     return $lista->getId_str_user() == $id;
                                                  }
@@ -55,7 +52,9 @@ and open the template in the editor.
                 $totalRetweets = 0;
                 $totalLikes = 0;
                 $totalMentions = 0;
-                                
+                
+                // A função array_filter irá retornar os tweets agrupados pelos usuários, o que pode ser um vetor. 
+                // Caso seja, e de acordo com a regra de relevância, estes serão ordenados de acordo com a avaliação.
                 usort(
                     $ret,
                     function($a,$b) {
@@ -86,21 +85,21 @@ and open the template in the editor.
                 array_push($listaUsuarios, $usuario);
                 array_push($mostMentionsLocaweb, $ret);
             }
-            
+
             usort(
                 $listaUsuarios,
                 function($a,$b) {
-                    if($a->getTotalMentions() == $b->getTotalMentions()) return 0;
-                    return (($a->getTotalMentions() > $b->getTotalMentions()) ? -1 : 1 );
+                    if($a->getAvaliacao() == $b->getAvaliacao()) return 0;
+                    return (($a->getAvaliacao() > $b->getAvaliacao()) ? -1 : 1 );
                 }
-            );
+            );           
             
             for ($i=0; $i<count($listaUsuarios);$i=$i+1){
                 
                 $subarray = array();
                 
                 $posi = $listaUsuarios[$i]->getIdPosi();
-
+                
                 foreach($mostMentionsLocaweb[$posi] as $mm) {
                     $resultado = new ResultadoTweet();
                     $resultado->setCreated_at($mm->getCreatAt());
@@ -111,16 +110,19 @@ and open the template in the editor.
                     $resultado->setScreen_name($mm->getScreenName());
                     $resultado->setLink_perfil('http://www.twitter.com/'.$mm->getScreenName());
                     $resultado->setLink_tweet('http://www.twitter.com/'.$mm->getScreenName().'/status/'.$mm->getId_str_tweet());
-
+                    
                     array_push($subarray, $resultado);
-                    
                 }
-                array_push($listagemTweets,$subarray);
-                    
-            }
-            //var_dump($listagemTweets);
-            //echo $json = json_encode($listagemTweets);
 
+                array_push($listagemTweets,$subarray);        
+            }
+
+            $json = json_encode($listagemTweets);
+            
+            $fp = fopen('arquivo.json', 'w');
+            fwrite($fp, $json);
+            
+            fclose($fp);
         ?>       
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
@@ -131,8 +133,8 @@ and open the template in the editor.
         </nav>
         <div class="jumbotron">
             <div class="container">
-              <p>Aqui estão listados os usuários que mais mencionaram a Locaweb, e seus respectivos tweets, os quais foram ordenados de acordo com as seguintes regras:<br>(1) Usuários com mais seguidores<br>(2) Tweets que tenham mais retweets<br>(3) Tweet com mais likes</p>
-              <!--<p><a class="btn btn-primary btn-lg" href="arquivo.json" target="_blank" role="button">Visualizar JSON &raquo;</a></p>-->
+              <p>Para a lista dos usuários que mais mencionarem o usuário da Locaweb,os tweets devem ser agregados por usuário, aplicando os mesmos critérios de ordenação dos mais relevantes.</p>
+              <p><a class="btn btn-primary btn-lg" href="arquivo.json" target="_blank" role="button">Visualizar JSON &raquo;</a></p>
             </div>
         </div>
         <div class="container">
@@ -145,10 +147,6 @@ and open the template in the editor.
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="classif">
               <div class="panel panel-default">
-                <!--<div class="panel-heading"></div>-->
-                <!--<div class="panel-body">
-                  <p>Os usuários aqui foram classificados considerando o número de vezes que eles mencionaram a empresa.</p>
-                </div>-->
                 <table class="table">
                     <ul class="list-group">
                         <?php
@@ -171,7 +169,6 @@ and open the template in the editor.
                     <th width="20%">Data/Hora do tweet</th>
                 </tr>
                 <?php
-                    //$i = 1;
                     foreach ($listagemTweets as $lt){
                         echo '<tr>';
                         $rows = count($lt);
@@ -181,11 +178,10 @@ and open the template in the editor.
                             echo '<td>'.$r->getFollowers_count().'</td>';
                             echo '<td>'.$r->getRetweet_count().'</td>';
                             echo '<td>'.$r->getFavourites_count().'</td>';
-                            echo '<td><a href="'.$r->getLink_tweet().'" target="_blank">@'.$r->getCreated_at().'</a></td>';
+                            echo '<td><a href="'.$r->getLink_tweet().'" target="_blank">'.$r->getCreated_at().'</a></td>';
                             echo '</tr>';
                         }
                         echo '</tr>';
-                        //$i = $i +1;
                     }
                 ?>
             </table>               
