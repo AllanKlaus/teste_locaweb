@@ -84,31 +84,7 @@ and open the template in the editor.
                     }
                 }                
             }
-            $tweet2 = new Tweet(11, 5, 4, "Larissa_Camila", "Mon Sep 24 03:35:21 +0000 2012", "Teste 1", 2, 1, 42, 42);
-            array_push($listaTweet, $tweet2);
-            if (!in_array($tweet2->getId_str_user(), $idUsuario)){
-                        array_push($idUsuario, $tweet2->getId_str_user());
-                    }
-            $tweet3 = new Tweet(11, 4, 3, "Larissa_Camila", "Mon Sep 24 03:35:21 +0000 2012", "Teste 2", 3, 1, 42, 42);
-            array_push($listaTweet, $tweet3);
-            if (!in_array($tweet3->getId_str_user(), $idUsuario)){
-                        array_push($idUsuario, $tweet3->getId_str_user());
-                    }
             
-            $tweet4 = new Tweet(11, 5, 10, "Willian", "Mon Sep 24 03:35:21 +0000 2012", "Teste 1", 2, 3, 42, 42);
-            array_push($listaTweet, $tweet4);
-            if (!in_array($tweet2->getId_str_user(), $idUsuario)){
-                        array_push($idUsuario, $tweet4->getId_str_user());
-                    }
-            $tweet5 = new Tweet(11, 4, 3, "Willian", "Mon Sep 24 03:35:21 +0000 2012", "Teste 2", 3, 3, 42, 42);
-            array_push($listaTweet, $tweet5);
-            if (!in_array($tweet3->getId_str_user(), $idUsuario)){
-                        array_push($idUsuario, $tweet5->getId_str_user());
-                    }        
-            
-            /*for ($y=0; $y<count($listaTweet); $y = $y+1){
-                $listaTweet[$y]->avaliarTweet();                
-            } */         
             
             $_SESSION['tweets'] = serialize($listaTweet);
             $_SESSION['idUsers'] = serialize($idUsuario);
