@@ -74,7 +74,7 @@ and open the template in the editor.
                         echo '
                             <div class="col-md-4">
                             <h2><a href="'.$lt->getLink_perfil().'" target="_blank">@'.$lt->getScreen_name().'</a></h2>
-                            <h5><a href="'.$lt->getLink_tweet().'" target="_blank">@'.$lt->getCreated_at().'</a></h5>
+                            <h5><a href="'.$lt->getLink_tweet().'" target="_blank">'.$lt->getCreated_at().'</a></h5>
                             <p><b>'.$lt->getText().'</b></p>
                             <p>'.$lt->getFollowers_count().' seguidores </p>
                             <p>'.$lt->getRetweet_count().' retweets</p>

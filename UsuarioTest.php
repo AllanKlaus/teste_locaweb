@@ -18,21 +18,21 @@ class UsuarioTest extends PHPUnit_Framework_TestCase{
     public function tests(){
         $usuario = new Usuario();
         
-        $usuario->setIdUser("");
-        $usuario->setTotalFollowers("");
+        $usuario->setIdUser(15);
+        $usuario->setTotalFollowers(21);
         $usuario->setTotalRetweets(30);
         $usuario->setTotalLikes(14);
-        $usuario->setIdPosi("");
+        $usuario->setTotalMentions(15);
+        $usuario->setIdPosi(3);
         
         
-        $this->assertEquals("", $usuario->getIdUser());
-        $this->assertEquals("", $usuario->getTotalFollowers());
+        $this->assertEquals(15, $usuario->getIdUser());
+        $this->assertEquals(21, $usuario->getTotalFollowers());
         $this->assertEquals(30, $usuario->getTotalRetweets());
         $this->assertEquals(14, $usuario->getTotalLikes());
-        $this->assertEquals("", $usuario->getIdPosi());
+        $this->assertEquals(3, $usuario->getIdPosi());
         
-        $this->assertEquals("", $usuario->avaliarTweetUsuario());
-        
+        $this->assertEquals(30021.74, $usuario->avaliarTweetUsuario());
                 
     }
     
